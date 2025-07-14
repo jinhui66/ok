@@ -311,9 +311,15 @@ def detect_edge(img_path, output_dir="./data/edge_y", bin_dir="./data/bin"):
     final_edges = fill_linear_region(final_edges, left_index, right_index)
 
     final_index = img2index(final_edges)
-    # 保存 final_index 为 bin 文件（如：xxx.bin）
-    bin_path = os.path.join(bin_dir, os.path.basename(img_path) + ".bin")
+
+    # 去掉扩展名后保存为 bin 文件
+    filename_wo_ext = os.path.splitext(os.path.basename(img_path))[0]
+    bin_path = os.path.join(bin_dir, filename_wo_ext + ".bin")
     final_index.tofile(bin_path)
+
+    # 保存bin
+    output_path = os.path.join(output_dir, os.path.basename(img_path))
+    cv2.imwrite(output_path, final_edges)
 
     # 保存结果
     output_path = os.path.join(output_dir, os.path.basename(img_path))
