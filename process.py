@@ -34,10 +34,10 @@ def process(img_path, output_dir="../data/processed"):
         _, binary_img = cv2.threshold(img, threshold_value, max_value, cv2.THRESH_BINARY)  
 
 
-        kernel_size1 = (3,3)
+        kernel_size1 = (5,5)
         circle_kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, kernel_size1)
 
-        kernel_size2 = (10,10)
+        kernel_size2 = (5,5)
         circle_kernel2 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, kernel_size2)
 
         # 应用闭运算

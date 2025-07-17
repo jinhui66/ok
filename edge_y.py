@@ -80,12 +80,18 @@ def remove_small_components(img, min_size=10):
 def iterly_remove_single_point(top_index, threshold):
     current_index = top_index[0]
     current_threshold = threshold
-    max_threshold = 10 * threshold
+    max_threshold = 50 * threshold
+    flag = True
     # print(top_index[0])
     for i in range(len(top_index)):
         # print(current_index, top_index[i], current_threshold)
-        if abs(top_index[i] - current_index) <= current_threshold and top_index[i] - current_index <=0:
+        # print(top_index[i] - top_index[0])
+        # if top_index[i] - top_index[0] >= 10:
+        #     flag = False
+
+        if abs(top_index[i] - current_index) <= current_threshold and top_index[i] - current_index <=0 and flag:
             current_index = top_index[i]
+            current_threshold = threshold
         else:
             top_index[i] = -1
             current_threshold += threshold
@@ -108,7 +114,7 @@ def img2index(edge):
             top_index[x] = -1 # No edge found in this column
     return top_index
 
-def valid_edge(edge, left_index, right_index, threshold=3):
+def valid_edge(edge, left_index, right_index, threshold=1.5):
     height, width = edge.shape
     top_index = img2index(edge)
     
@@ -308,7 +314,6 @@ def detect_edge(img_path, output_dir="./data/edge_y", bin_dir="./data/bin"):
     for left_index, right_index in missing_regions:
         final_edges = fill_linear_region(final_edges, left_index, right_index, margin=5)
 
-    final_edges = fill_linear_region(final_edges, left_index, right_index)
 
     final_index = img2index(final_edges)
 
