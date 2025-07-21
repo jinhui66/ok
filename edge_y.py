@@ -27,7 +27,7 @@ def extract_top_pixel(img):
             result[first_255_pos, x] = 255  # 只保留第一个255
     return result
 
-def find_all_white_columns(img, white_ratio_threshold=0.8):
+def find_all_white_columns(img, white_ratio_threshold=0.7):
     """
     找到所有白色像素占比超过一定比例的列索引
     :param img: 二值化图像（0和255）
@@ -118,6 +118,8 @@ def valid_edge(edge, left_index, right_index, threshold=1.5):
     height, width = edge.shape
     top_index = img2index(edge)
     
+    # top_index[left_index-1] = 800
+    # top_index[right_index+1] = 800
     # Separate left and right edges
     left_top = top_index[:left_index][::-1]
     right_top = top_index[right_index+1:]
@@ -274,7 +276,7 @@ def detect_missing_region(img):
     return missing_regions
 
 
-def detect_edge(img_path, output_dir="./data/edge_y", bin_dir="./data/bin"):
+def detect_edge(img_path, output_dir="./data/edge_png", bin_dir="./data/bin"):
     # 读取灰度图像  
     img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  
     

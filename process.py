@@ -18,7 +18,7 @@ def kai(img, circle_kernel, iterations):
     eroded_img = cv2.erode(dilated_img, circle_kernel, iterations=iterations)  
     return eroded_img
 
-def process(img_path, output_dir="../data/processed"):
+def process(img_path, output_dir="./data/processed"):
     # 读取灰度图像  
     img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  
     # print(img)
@@ -34,7 +34,7 @@ def process(img_path, output_dir="../data/processed"):
         _, binary_img = cv2.threshold(img, threshold_value, max_value, cv2.THRESH_BINARY)  
 
 
-        kernel_size1 = (5,5)
+        kernel_size1 = (3,3)
         circle_kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, kernel_size1)
 
         kernel_size2 = (5,5)
@@ -51,10 +51,11 @@ def process(img_path, output_dir="../data/processed"):
         cv2.imwrite(output_path, img3)
 
 if __name__ == "__main__":
-    intput_dir = "./data/origin"
+    input_dir = "./data/origin_2"
+    # input_dir = "../png_to_sever/png_to_sever/png_data_OctStruct/00DE272A-6A8C-4E5C-AB5E-14630E664CCA"
     output_dir = "./data/processed"
     os.makedirs(output_dir, exist_ok=True)
-    for i in os.listdir(intput_dir):
-        img_path = os.path.join(intput_dir, i)
-        process(img_path)
+    for i in os.listdir(input_dir):
+        img_path = os.path.join(input_dir, i)
+        process(img_path, output_dir=output_dir)
         print(f"Processed {i} and saved to {output_dir}")

@@ -1,9 +1,10 @@
 import cv2
 import matplotlib.pyplot as plt
 
-id = "frame_001.png"
-img_path = f"./data/origin/{id}"
-edge_path = f"./data/edge_y/{id}"
+id = "frame_060.png"
+img_path = f"./data/origin_2/{id}"
+# img_path = f"../png_to_sever/png_to_sever/png_data_OctStruct/00DE272A-6A8C-4E5C-AB5E-14630E664CCA/{id}"
+edge_path = f"./data/edge_png/{id}"
 
 # 读取图像（原始图像转为三通道，边缘检测结果保持单通道）
 img = cv2.imread(img_path, cv2.IMREAD_COLOR)  # 直接读取为三通道彩色图
